@@ -6,11 +6,15 @@ const forwards = document.querySelector('#forwards');
 const backwards = document.querySelector('#backwards');
 const audio = document.querySelector('#overall-audio');
 
-//const extraAudio = document.querySelector('#extra-audio');
-const video1 = document.querySelector('#video1');
-const video2 = document.querySelector('#video2');
+const video4 = document.querySelector('#video4');
+var player4 = new Vimeo.Player(video4);
+const video5 = document.querySelector('#video5');
+var player5 = new Vimeo.Player(video5);
+const video6 = document.querySelector('#video6');
+var player6 = new Vimeo.Player(video6);
+const video7 = document.querySelector('#video7');
+var player7 = new Vimeo.Player(video7);
 const video8 = document.querySelector('#video8');
-
 var player8 = new Vimeo.Player(video8);
 
 beginBtn.addEventListener('click', () => {
@@ -19,9 +23,18 @@ beginBtn.addEventListener('click', () => {
     audio.play();
     setTimeout(() => {
         overlay.style.display = 'none';
-    }, 1000);
+        player4.setVolume(0);
+        player5.setVolume(0);
+        player6.setVolume(0);
+        player7.setVolume(0);
+        player8.setVolume(0);
 
-    player8.muted = true;
+        player4.pause();
+        player5.pause();
+        player6.pause();
+        player7.pause();
+        player8.pause();
+    }, 1000);
 });
 beginBtn.addEventListener('touchend', () => {
     overlay.style.opacity = 0;
@@ -31,42 +44,6 @@ beginBtn.addEventListener('touchend', () => {
         overlay.style.display = 'none';
     }, 1000);
 });
-
-
-// pause play overall audio with sound guided visualisation
-// extraAudio.onplay = function(){
-//   audio.volume = 0;
-// }
-// extraAudio.onpause = function(){
-//   audio.volume = 1;
-// }
-// extraAudio.onended = function(){
-//   audio.volume = 1;
-// }
-
-// pause play audio with video files
-// player1 = new Vimeo.Player(video1);
-// player2 = new Vimeo.Player(video2);
-
-// player1.on('play', () => {
-//   audio.volume = 0
-// })
-// player1.on('pause', () => {
-//   audio.volume = 1;
-// })
-// player1.on('ended', () => {
-//   audio.volume = 1;
-// });
-
-// player2.on('play', () => {
-//   audio.volume = 0
-// })
-// player2.on('pause', () => {
-//   audio.volume = 1;
-// })
-// player2.on('ended', () => {
-//   audio.volume = 1;
-// })
 
 let layers = [];
 
@@ -150,10 +127,85 @@ backwards.addEventListener('click', () => {
     moveCamera();
 });
 
-$(window).scroll(function() {
+$(window).scroll(function() 
+{
     var pageScroll = $(window).scrollTop();
+
     if(pageScroll > 700)
     { 
         audio.volume = 0;
+    }
+    if(pageScroll < 700)
+    { 
+        audio.volume = 1;
+    }
+    if(pageScroll <= 1600)
+    { 
+      player4.setVolume(0);
+      player5.setVolume(0);
+      player6.setVolume(0);
+      player7.setVolume(0);
+      player8.setVolume(0);
+    }
+    if(pageScroll >= 1750 && pageScroll < 1950)
+    { 
+      player5.setVolume(0);
+      player6.setVolume(0);
+      player7.setVolume(0);
+      player8.setVolume(0);
+
+      player4.play();
+      player4.setVolume(1);
+    }
+    if(pageScroll >= 1950 && pageScroll < 2600)
+    { 
+      player4.setVolume(0);
+      player6.setVolume(0);
+      player7.setVolume(0);
+      player8.setVolume(0);
+
+      player5.play();
+      player5.setVolume(1);
+    }
+    if(pageScroll >= 2600 && pageScroll < 3000)
+    { 
+      player4.setVolume(0);
+      player5.setVolume(0);
+      player8.setVolume(0);
+      player7.setVolume(0);
+
+      player6.play();
+      player6.setVolume(1);
+    }
+
+    if(pageScroll >= 3000 && pageScroll < 3600)
+    { 
+      player4.setVolume(0);
+      player5.setVolume(0);
+      player6.setVolume(0);
+      player8.setVolume(0);
+
+      player7.play();
+      player7.setVolume(1);
+    }
+
+    if(pageScroll > 3600 && pageScroll < 3700)
+    { 
+      player4.setVolume(0);
+      player5.setVolume(0);
+      player6.setVolume(0);
+      player7.setVolume(0);
+
+      player8.play();
+      player8.setVolume(1);
+    }
+
+    if(pageScroll > 3700)
+    { 
+      player4.setVolume(0);
+      player5.setVolume(0);
+      player6.setVolume(0);
+      player7.setVolume(0);
+      player8.setVolume(0);
     }
   });
